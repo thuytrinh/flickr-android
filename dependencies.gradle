@@ -1,0 +1,69 @@
+/**
+ * This is a centralized place to manage Gradle dependencies.
+ * This approach is an adoption of this practice:
+ * http://bytes.babbel.com/en/articles/2017-01-24-android-library-dependencies.html.
+ */
+
+def versions = new Expando()
+versions.immutablesVersion = "2.5.5"
+versions.minSdkVersion = 15
+versions.compileSdkVersion = 26
+versions.buildToolsVersion = "26.0.1"
+versions.targetSdkVersion = 26
+versions.playServicesVersion = "11.0.2"
+versions.firebaseAppIndexingVersion = "11.0.2"
+// See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
+versions.kotlinVersion = "1.1.51"
+versions.supportLibraryVersion = "26.0.0"
+// See change-log at https://twitter.com/AGPVersions.
+versions.androidPluginVersion = "2.3.3"
+versions.okHttpVersion = "3.9.0"
+versions.retrofitVersion = "2.3.0"
+versions.dagger = "2.10"
+ext.versions = versions
+
+Expando libs = new Expando()
+libs.mockitoKotlin = "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
+libs.mockitoCore = "org.mockito:mockito-core:2.8.9"
+libs.robolectric = "org.robolectric:robolectric:3.4.2"
+libs.robolectricShadowsMultidex = "org.robolectric:shadows-multidex:3.3.2"
+libs.assertjCore = "org.assertj:assertj-core:2.6.0"
+
+// Support Library package
+libs.multidex = "com.android.support:multidex:1.0.1"
+libs.supportAnnotations = "com.android.support:support-annotations:$versions.supportLibraryVersion"
+libs.recyclerView = "com.android.support:recyclerview-v7:$versions.supportLibraryVersion"
+libs.cardView = "com.android.support:cardview-v7:$versions.supportLibraryVersion"
+libs.supportDesign = "com.android.support:design:$versions.supportLibraryVersion"
+libs.supportV4 = "com.android.support:support-v4:$versions.supportLibraryVersion"
+libs.appCompat = "com.android.support:appcompat-v7:$versions.supportLibraryVersion"
+libs.constraintLayout = "com.android.support.constraint:constraint-layout:1.0.2"
+
+libs.value = "org.immutables:value:$versions.immutablesVersion"
+libs.valueAnnotations = "org.immutables:value:$versions.immutablesVersion"
+libs.builderAnnotations = "org.immutables:builder:$versions.immutablesVersion"
+libs.gsonAnnotations = "org.immutables:gson:$versions.immutablesVersion"
+
+libs.dagger = "com.google.dagger:dagger:$versions.dagger"
+libs.daggerAndroid = "com.google.dagger:dagger-android:$versions.dagger"
+libs.daggerAndroidSupport = "com.google.dagger:dagger-android-support:$versions.dagger"
+libs.daggerCompiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+libs.daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:$versions.dagger"
+
+libs.rxjava = "io.reactivex:rxjava:1.2.4"
+libs.rxrelay1 = "com.jakewharton.rxrelay:rxrelay:1.2.0"
+libs.kluent = "org.amshove.kluent:kluent:1.20"
+libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"
+libs.gson = "com.google.code.gson:gson:2.8.2"
+libs.junit = "junit:junit:4.12"
+libs.flexbox = "com.google.android:flexbox:0.3.0"
+libs.okHttp = "com.squareup.okhttp3:okhttp:$versions.okHttpVersion"
+libs.mockWebServer = "com.squareup.okhttp3:mockwebserver:$versions.okHttpVersion"
+libs.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
+libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:$versions.retrofitVersion"
+libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
+libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.1"
+libs.timber = "com.jakewharton.timber:timber:4.5.1"
+libs.rxtry = "com.github.thuytrinh:RxTry:c2f002df6c"
+libs.koptional = "com.gojuno.koptional:koptional:1.2.0"
+ext.libs = libs
