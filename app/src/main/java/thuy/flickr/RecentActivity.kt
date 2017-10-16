@@ -2,13 +2,13 @@ package thuy.flickr
 
 import android.os.Bundle
 import dagger.android.support.DaggerAppCompatActivity
-import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity() {
-  @Inject lateinit var viewModel: RecentViewModel
-
+class RecentActivity : DaggerAppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.main)
+    supportFragmentManager
+        .beginTransaction()
+        .replace(android.R.id.content, RecentFragment())
+        .commit()
   }
 }
