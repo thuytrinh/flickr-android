@@ -15,6 +15,7 @@ android {
 }
 
 dependencies {
+  compile project(":domain")
   compile libs.rxJava
   compile libs.gson
   compile libs.okHttp
@@ -25,4 +26,11 @@ dependencies {
   compile libs.roomRuntime
   kapt libs.roomCompiler
   compile libs.roomRxJava
+  compile libs.kotlin
+
+  compile libs.dagger
+  kapt libs.daggerCompiler
+  kapt libs.daggerAndroidProcessor
+  compile libs.daggerAndroid
+  compile libs.daggerAndroidSupport
 }

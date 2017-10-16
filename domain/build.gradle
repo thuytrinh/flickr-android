@@ -5,6 +5,8 @@ apply plugin: "kotlin-kapt"
 dependencies {
   compile libs.rxJava
   compile libs.kotlin
+  compile libs.dagger
+  kapt libs.daggerCompiler
 }
 
 sourceCompatibility = "1.8"
