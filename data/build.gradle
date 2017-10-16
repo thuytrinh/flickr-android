@@ -1,0 +1,25 @@
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+
+android {
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
+
+  defaultConfig {
+    minSdkVersion versions.minSdkVersion
+    targetSdkVersion versions.targetSdkVersion
+    versionCode 1
+    versionName "1.0"
+  }
+}
+
+dependencies {
+  compile libs.rxJava
+  compile libs.gson
+  compile libs.okHttp
+  compile libs.mockWebServer
+  compile libs.retrofit
+  compile libs.retrofitAdapterRxJava
+  compile libs.retrofitConverterGson
+}
