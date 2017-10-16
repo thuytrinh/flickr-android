@@ -30,7 +30,4 @@ dependencies {
 
   compile libs.dagger
   kapt libs.daggerCompiler
-  kapt libs.daggerAndroidProcessor
-  compile libs.daggerAndroid
-  compile libs.daggerAndroidSupport
 }
