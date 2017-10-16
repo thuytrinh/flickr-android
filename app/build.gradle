@@ -42,6 +42,7 @@ dependencies {
   compile libs.constraintLayout
   compile libs.recyclerView
   compile libs.kotlin
+  compile libs.fresco
 
   compile libs.dagger
   kapt libs.daggerCompiler
