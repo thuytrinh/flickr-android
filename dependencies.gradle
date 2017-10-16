@@ -19,11 +19,12 @@ versions.androidPluginVersion = "2.3.3"
 versions.okHttpVersion = "3.9.0"
 versions.retrofitVersion = "2.3.0"
 versions.dagger = "2.12"
+versions.architectureComponents = "1.0.0-beta2"
 ext.versions = versions
 
 Expando libs = new Expando()
 
-// Test dependencies.
+// Test dependencies
 libs.junit = "junit:junit:4.12"
 libs.mockitoKotlin = "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
 libs.mockitoCore = "org.mockito:mockito-core:2.8.9"
@@ -64,4 +65,10 @@ libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava2:$versions.r
 libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
 libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.1"
 libs.koptional = "com.gojuno.koptional:koptional:1.2.0"
+
+// Architecture Components
+libs.roomRuntime = "android.arch.persistence.room:runtime:$versions.architectureComponents"
+libs.roomCompiler = "android.arch.persistence.room:compiler:$versions.architectureComponents"
+libs.roomRxJava = "android.arch.persistence.room:rxjava2:$versions.architectureComponents"
+
 ext.libs = libs

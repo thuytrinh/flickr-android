@@ -22,4 +22,7 @@ dependencies {
   compile libs.retrofit
   compile libs.retrofitAdapterRxJava
   compile libs.retrofitConverterGson
+  compile libs.roomRuntime
+  kapt libs.roomCompiler
+  compile libs.roomRxJava
 }
