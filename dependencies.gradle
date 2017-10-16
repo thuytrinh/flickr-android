@@ -18,7 +18,7 @@ versions.supportLibraryVersion = "26.1.0"
 versions.androidPluginVersion = "2.3.3"
 versions.okHttpVersion = "3.9.0"
 versions.retrofitVersion = "2.3.0"
-versions.dagger = "2.10"
+versions.dagger = "2.12"
 ext.versions = versions
 
 Expando libs = new Expando()
