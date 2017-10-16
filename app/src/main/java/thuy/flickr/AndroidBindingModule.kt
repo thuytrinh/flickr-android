@@ -5,6 +5,8 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class AndroidBindingModule {
-  @ContributesAndroidInjector
+  @ContributesAndroidInjector(modules = arrayOf(
+      MainActivityModule::class
+  ))
   abstract fun mainActivity(): MainActivity
 }
