@@ -10,11 +10,10 @@ versions.minSdkVersion = 15
 versions.compileSdkVersion = 26
 versions.buildToolsVersion = "26.0.1"
 versions.targetSdkVersion = 26
-versions.playServicesVersion = "11.0.2"
-versions.firebaseAppIndexingVersion = "11.0.2"
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 versions.kotlinVersion = "1.1.51"
-versions.supportLibraryVersion = "26.0.0"
+// See change-log at https://developer.android.com/topic/libraries/support-library/revisions.html.
+versions.supportLibraryVersion = "26.1.0"
 // See change-log at https://twitter.com/AGPVersions.
 versions.androidPluginVersion = "2.3.3"
 versions.okHttpVersion = "3.9.0"
@@ -23,6 +22,9 @@ versions.dagger = "2.10"
 ext.versions = versions
 
 Expando libs = new Expando()
+
+// Test dependencies.
+libs.junit = "junit:junit:4.12"
 libs.mockitoKotlin = "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
 libs.mockitoCore = "org.mockito:mockito-core:2.8.9"
 libs.robolectric = "org.robolectric:robolectric:3.4.2"
@@ -50,20 +52,16 @@ libs.daggerAndroidSupport = "com.google.dagger:dagger-android-support:$versions.
 libs.daggerCompiler = "com.google.dagger:dagger-compiler:$versions.dagger"
 libs.daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:$versions.dagger"
 
-libs.rxjava = "io.reactivex:rxjava:1.2.4"
-libs.rxrelay1 = "com.jakewharton.rxrelay:rxrelay:1.2.0"
+libs.rxjava = "io.reactivex.rxjava2:rxjava:2.1.5"
+libs.rxrelay = "com.jakewharton.rxrelay2:rxrelay:2.0.0"
 libs.kluent = "org.amshove.kluent:kluent:1.20"
 libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"
 libs.gson = "com.google.code.gson:gson:2.8.2"
-libs.junit = "junit:junit:4.12"
-libs.flexbox = "com.google.android:flexbox:0.3.0"
 libs.okHttp = "com.squareup.okhttp3:okhttp:$versions.okHttpVersion"
 libs.mockWebServer = "com.squareup.okhttp3:mockwebserver:$versions.okHttpVersion"
 libs.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
-libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:$versions.retrofitVersion"
+libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofitVersion"
 libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
 libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.1"
-libs.timber = "com.jakewharton.timber:timber:4.5.1"
-libs.rxtry = "com.github.thuytrinh:RxTry:c2f002df6c"
 libs.koptional = "com.gojuno.koptional:koptional:1.2.0"
 ext.libs = libs
