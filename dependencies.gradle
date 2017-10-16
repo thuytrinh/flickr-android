@@ -52,8 +52,8 @@ libs.daggerAndroidSupport = "com.google.dagger:dagger-android-support:$versions.
 libs.daggerCompiler = "com.google.dagger:dagger-compiler:$versions.dagger"
 libs.daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:$versions.dagger"
 
-libs.rxjava = "io.reactivex.rxjava2:rxjava:2.1.5"
-libs.rxrelay = "com.jakewharton.rxrelay2:rxrelay:2.0.0"
+libs.rxJava = "io.reactivex.rxjava2:rxjava:2.1.5"
+libs.rxRelay = "com.jakewharton.rxrelay2:rxrelay:2.0.0"
 libs.kluent = "org.amshove.kluent:kluent:1.20"
 libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"
 libs.gson = "com.google.code.gson:gson:2.8.2"
