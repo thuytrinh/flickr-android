@@ -6,6 +6,8 @@ import thuy.flickr.recent.RecentPhotosFragment
 
 @Module
 abstract class AndroidBindingModule {
-  @ContributesAndroidInjector()
+  @ContributesAndroidInjector(modules = arrayOf(
+      PhotoRepositoryModule::class
+  ))
   abstract fun getRecentPhotosFragment(): RecentPhotosFragment
 }
