@@ -11,6 +11,7 @@ import thuy.flickr.BR
 import thuy.flickr.R
 import thuy.flickr.databinding.RecentPhotosBinding
 import thuy.flickr.photodetails.PhotoDetailsActivity
+import thuy.flickr.search.SearchActivity
 import javax.inject.Inject
 
 class RecentPhotosFragment : DaggerFragment() {
@@ -44,6 +45,12 @@ class RecentPhotosFragment : DaggerFragment() {
     val binding = RecentPhotosBinding.bind(view)
     binding.swipeRefreshLayout.isEnabled = false
     binding.toolbar.inflateMenu(R.menu.recent_photos)
+    binding.toolbar.setOnMenuItemClickListener {
+      when (it.itemId) {
+        R.id.search -> startActivity(SearchActivity.newIntent(activity))
+      }
+      true
+    }
 
     binding.photoItemBinding = ItemBinding.of<PhotoViewModel>(BR.viewModel, R.layout.photo)
     binding.viewModel = viewModel
