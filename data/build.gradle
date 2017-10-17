@@ -19,14 +19,10 @@ dependencies {
   compile libs.rxJava
   compile libs.gson
   compile libs.okHttp
-  compile libs.mockWebServer
   compile libs.retrofit
   compile libs.retrofitAdapterRxJava
   compile libs.retrofitConverterGson
   compile libs.kotlin
-  compile libs.roomRuntime
-  kapt libs.roomCompiler
-  compile libs.roomRxJava
 
   compile libs.dagger
   kapt libs.daggerCompiler

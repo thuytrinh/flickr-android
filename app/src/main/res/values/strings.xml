@@ -2,6 +2,8 @@
   <string name="appName">Flickr</string>
   <string name="recent">Recent</string>
   <string name="search">Search</string>
+  <string name="cannot_load_photos">Can\'t load photos</string>
+  <string name="retry">Retry</string>
   <plurals name="xPhotos">
     <item quantity="one">%d photo</item>
     <item quantity="other">%d photos</item>

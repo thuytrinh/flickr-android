@@ -5,20 +5,27 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableList
+import com.jakewharton.rxrelay2.PublishRelay
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import thuy.flickr.*
+import thuy.flickr.core.BaseViewModel
 import javax.inject.Inject
 
 class RecentPhotosViewModel @Inject internal constructor(
     private val photoRepository: PhotoRepository,
     private val photoViewModelMapper: PhotoViewModelMapper,
     private val resources: Resources
-) {
+) : BaseViewModel() {
   val photoCountText = ObservableField<String>()
   val isPhotoCountVisible = ObservableBoolean()
   val photos: ObservableList<PhotoViewModel> = ObservableArrayList<PhotoViewModel>()
   val isLoading = ObservableBoolean()
+
+  private val onErrorLoadingPhotosRelay = PublishRelay.create<Unit>()
+  val onErrorLoadingPhotos: Observable<Unit>
+    get() = onErrorLoadingPhotosRelay.autoClear()
 
   fun loadPhotos() {
     photoRepository.getRecent()
@@ -35,7 +42,10 @@ class RecentPhotosViewModel @Inject internal constructor(
               isLoading.set(false)
               loadPhotoCount(result)
             }
-            is Failure -> isLoading.set(false)
+            is Failure -> {
+              onErrorLoadingPhotosRelay.accept(Unit)
+              isLoading.set(false)
+            }
           }
         }
   }

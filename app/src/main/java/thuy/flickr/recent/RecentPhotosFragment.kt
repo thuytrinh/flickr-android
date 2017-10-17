@@ -1,6 +1,7 @@
 package thuy.flickr.recent
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,14 @@ class RecentPhotosFragment : DaggerFragment() {
     retainInstance = true
 
     viewModel.loadPhotos()
+    viewModel.onErrorLoadingPhotos.subscribe {
+      view?.let {
+        Snackbar
+            .make(it, R.string.cannot_load_photos, Snackbar.LENGTH_LONG)
+            .setAction(R.string.retry) { viewModel.loadPhotos() }
+            .show()
+      }
+    }
   }
 
   override fun onCreateView(
@@ -34,5 +43,10 @@ class RecentPhotosFragment : DaggerFragment() {
 
     binding.photoItemBinding = ItemBinding.of<PhotoViewModel>(BR.viewModel, R.layout.photo)
     binding.viewModel = viewModel
+  }
+
+  override fun onDestroy() {
+    viewModel.onCleared()
+    super.onDestroy()
   }
 }

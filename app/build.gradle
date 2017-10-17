@@ -42,14 +42,15 @@ dependencies {
   testCompile libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
   testCompile libs.kluent, { exclude group: "org.jetbrains.kotlin" }
 
+  compile libs.supportDesign
   compile libs.appCompat
-  compile libs.constraintLayout
   compile libs.recyclerView
   compile libs.kotlin
   compile libs.fresco
   kapt libs.dataBindingCompiler
   compile libs.bindingCollectionAdapterRecyclerView
   compile libs.rxAndroid
+  compile libs.rxRelay
 
   compile libs.dagger
   kapt libs.daggerCompiler
