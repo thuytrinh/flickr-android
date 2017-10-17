@@ -1,4 +1,4 @@
-package thuy.flickr
+package thuy.flickr.recent
 
 class RecentPhotosViewModel {
 }

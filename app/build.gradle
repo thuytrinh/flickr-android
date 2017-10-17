@@ -22,12 +22,12 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
     }
-
-    compileOptions {
-      sourceCompatibility JavaVersion.VERSION_1_8
-      targetCompatibility JavaVersion.VERSION_1_8
-    }
   }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  dataBinding { enabled = true }
 }
 
 dependencies {
@@ -43,6 +43,8 @@ dependencies {
   compile libs.recyclerView
   compile libs.kotlin
   compile libs.fresco
+  compile libs.dataBindingCompiler
+  compile libs.bindingCollectionAdapterRecyclerView
 
   compile libs.dagger
   kapt libs.daggerCompiler

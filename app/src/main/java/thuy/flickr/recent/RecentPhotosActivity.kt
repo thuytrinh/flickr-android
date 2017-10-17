@@ -1,4 +1,4 @@
-package thuy.flickr
+package thuy.flickr.recent
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

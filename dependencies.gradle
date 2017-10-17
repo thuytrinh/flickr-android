@@ -66,6 +66,8 @@ libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$versions.re
 libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.1"
 libs.koptional = "com.gojuno.koptional:koptional:1.2.0"
 libs.fresco = "com.facebook.fresco:fresco:1.5.0"
+libs.dataBindingCompiler = "com.android.databinding:compiler:$versions.androidPluginVersion"
+libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.2.0"
 
 // Architecture Components
 libs.roomRuntime = "android.arch.persistence.room:runtime:$versions.architectureComponents"

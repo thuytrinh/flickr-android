@@ -1,10 +1,12 @@
-package thuy.flickr
+package thuy.flickr.recent
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
+import thuy.flickr.R
+import thuy.flickr.databinding.RecentPhotosBinding
 
 class RecentPhotosFragment : DaggerFragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,4 +19,8 @@ class RecentPhotosFragment : DaggerFragment() {
       container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View? = layoutInflater?.inflate(R.layout.recent_photos, container, false)
+
+  override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    val binding = RecentPhotosBinding.bind(view)
+  }
 }
