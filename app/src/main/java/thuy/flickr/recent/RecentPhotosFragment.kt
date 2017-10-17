@@ -10,6 +10,7 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
 import thuy.flickr.BR
 import thuy.flickr.R
 import thuy.flickr.databinding.RecentPhotosBinding
+import thuy.flickr.photodetails.PhotoDetailsActivity
 import javax.inject.Inject
 
 class RecentPhotosFragment : DaggerFragment() {
@@ -27,6 +28,9 @@ class RecentPhotosFragment : DaggerFragment() {
             .setAction(R.string.retry) { viewModel.loadPhotos() }
             .show()
       }
+    }
+    viewModel.onPhotoTapped.subscribe {
+      startActivity(PhotoDetailsActivity.newIntent(activity, it))
     }
   }
 

@@ -47,6 +47,7 @@ dependencies {
   compile libs.recyclerView
   compile libs.kotlin
   compile libs.fresco
+  compile libs.photoDraweeView
   kapt libs.dataBindingCompiler
   compile libs.bindingCollectionAdapterRecyclerView
   compile libs.rxAndroid

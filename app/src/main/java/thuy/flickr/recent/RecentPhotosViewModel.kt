@@ -5,6 +5,7 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableList
+import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,6 +13,8 @@ import io.reactivex.schedulers.Schedulers
 import thuy.flickr.*
 import thuy.flickr.core.BaseViewModel
 import javax.inject.Inject
+
+typealias PhotoViewModels = List<PhotoViewModel>
 
 class RecentPhotosViewModel @Inject internal constructor(
     private val photoRepository: PhotoRepository,
@@ -27,6 +30,16 @@ class RecentPhotosViewModel @Inject internal constructor(
   val onErrorLoadingPhotos: Observable<Unit>
     get() = onErrorLoadingPhotosRelay.autoClear()
 
+  private val photosRelay = BehaviorRelay.create<PhotoViewModels>()
+  val onPhotoTapped: Observable<PhotoId>
+    get() = photosRelay
+        .switchMap {
+          Observable
+              .merge(it.map { it.tapAction.observe })
+              .map { it.id }
+        }
+        .autoClear()
+
   fun loadPhotos() {
     photoRepository.getRecent()
         .subscribeOn(Schedulers.io())
@@ -35,12 +48,9 @@ class RecentPhotosViewModel @Inject internal constructor(
           when (result) {
             is Busy -> isLoading.set(true)
             is Success<Photos> -> {
-              photos.clear()
-              photos.addAll(result.value.map {
-                photoViewModelMapper(it)
-              })
+              updatePhotos(result)
               isLoading.set(false)
-              loadPhotoCount(result)
+              updatePhotoCount(result)
             }
             is Failure -> {
               onErrorLoadingPhotosRelay.accept(Unit)
@@ -50,7 +60,16 @@ class RecentPhotosViewModel @Inject internal constructor(
         }
   }
 
-  private fun loadPhotoCount(result: Success<Photos>) = when {
+  private fun updatePhotos(result: Success<Photos>) {
+    val newPhotos = result.value.map {
+      photoViewModelMapper(it)
+    }
+    photosRelay.accept(newPhotos)
+    photos.clear()
+    photos.addAll(newPhotos)
+  }
+
+  private fun updatePhotoCount(result: Success<Photos>) = when {
     result.value.isNotEmpty() -> {
       photoCountText.set(resources.getQuantityString(
           R.plurals.xPhotos,

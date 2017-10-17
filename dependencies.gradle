@@ -70,6 +70,9 @@ libs.fresco = "com.facebook.fresco:fresco:1.5.0"
 libs.dataBindingCompiler = "com.android.databinding:compiler:$versions.androidPluginVersion"
 libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.2.0"
 
+// See https://github.com/ongakuer/PhotoDraweeView.
+libs.photoDraweeView = "me.relex:photodraweeview:1.1.3"
+
 // Architecture Components
 libs.roomRuntime = "android.arch.persistence.room:runtime:$versions.architectureComponents"
 libs.roomCompiler = "android.arch.persistence.room:compiler:$versions.architectureComponents"
