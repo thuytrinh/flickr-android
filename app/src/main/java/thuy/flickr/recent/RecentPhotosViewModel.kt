@@ -1,5 +1,6 @@
 package thuy.flickr.recent
 
+import android.content.res.Resources
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -11,7 +12,8 @@ import javax.inject.Inject
 
 class RecentPhotosViewModel @Inject internal constructor(
     private val photoRepository: PhotoRepository,
-    private val photoViewModelMapper: PhotoViewModelMapper
+    private val photoViewModelMapper: PhotoViewModelMapper,
+    private val resources: Resources
 ) {
   val photoCountText = ObservableField<String>()
   val isPhotoCountVisible = ObservableBoolean()
@@ -31,9 +33,22 @@ class RecentPhotosViewModel @Inject internal constructor(
                 photoViewModelMapper(it)
               })
               isLoading.set(false)
+              loadPhotoCount(result)
             }
             is Failure -> isLoading.set(false)
           }
         }
+  }
+
+  private fun loadPhotoCount(result: Success<Photos>) = when {
+    result.value.isNotEmpty() -> {
+      photoCountText.set(resources.getQuantityString(
+          R.plurals.xPhotos,
+          result.value.size,
+          result.value.size
+      ))
+      isPhotoCountVisible.set(true)
+    }
+    else -> isPhotoCountVisible.set(false)
   }
 }
