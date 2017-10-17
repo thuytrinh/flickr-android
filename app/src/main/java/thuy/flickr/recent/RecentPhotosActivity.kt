@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity
 class RecentPhotosActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    supportFragmentManager
-        .beginTransaction()
-        .replace(android.R.id.content, RecentPhotosFragment())
-        .commit()
+    if (savedInstanceState == null) {
+      supportFragmentManager
+          .beginTransaction()
+          .replace(android.R.id.content, RecentPhotosFragment())
+          .commit()
+    }
   }
 }

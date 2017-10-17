@@ -6,7 +6,7 @@ import android.databinding.ObservableField
 import android.databinding.ObservableList
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import thuy.flickr.PhotoRepository
+import thuy.flickr.*
 import javax.inject.Inject
 
 class RecentPhotosViewModel @Inject internal constructor(
@@ -20,12 +20,20 @@ class RecentPhotosViewModel @Inject internal constructor(
 
   fun loadPhotos() {
     photoRepository.getRecent()
-        .map { it.map { photoViewModelMapper(it) } }
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe { newPhotos ->
-          photos.clear()
-          photos.addAll(newPhotos)
+        .subscribe { result ->
+          when (result) {
+            is Busy -> isLoading.set(true)
+            is Success<Photos> -> {
+              photos.clear()
+              photos.addAll(result.value.map {
+                photoViewModelMapper(it)
+              })
+              isLoading.set(false)
+            }
+            is Failure -> isLoading.set(false)
+          }
         }
   }
 }
