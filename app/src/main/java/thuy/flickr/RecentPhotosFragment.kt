@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
 
-class RecentFragment : DaggerFragment() {
+class RecentPhotosFragment : DaggerFragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     retainInstance = true
@@ -16,5 +16,5 @@ class RecentFragment : DaggerFragment() {
       inflater: LayoutInflater?,
       container: ViewGroup?,
       savedInstanceState: Bundle?
-  ): View? = layoutInflater?.inflate(R.layout.recent, container, false)
+  ): View? = layoutInflater?.inflate(R.layout.recent_photos, container, false)
 }

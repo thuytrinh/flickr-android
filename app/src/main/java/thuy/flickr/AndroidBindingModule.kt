@@ -6,8 +6,5 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class AndroidBindingModule {
   @ContributesAndroidInjector()
-  abstract fun mainActivity(): RecentActivity
-
-  @ContributesAndroidInjector()
-  abstract fun recentFragment(): RecentFragment
+  abstract fun getRecentPhotosFragment(): RecentPhotosFragment
 }

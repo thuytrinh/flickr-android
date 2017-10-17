@@ -1,14 +1,14 @@
 package thuy.flickr
 
 import android.os.Bundle
-import dagger.android.support.DaggerAppCompatActivity
+import android.support.v7.app.AppCompatActivity
 
-class RecentActivity : DaggerAppCompatActivity() {
+class RecentPhotosActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     supportFragmentManager
         .beginTransaction()
-        .replace(android.R.id.content, RecentFragment())
+        .replace(android.R.id.content, RecentPhotosFragment())
         .commit()
   }
 }
