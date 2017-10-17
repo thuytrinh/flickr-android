@@ -1,3 +1,4 @@
 <resources>
   <string name="appName">Flickr</string>
+  <string name="recent">Recent</string>
 </resources>
