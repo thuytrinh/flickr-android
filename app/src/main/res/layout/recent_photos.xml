@@ -7,6 +7,12 @@
     <variable
       name="viewModel"
       type="thuy.flickr.recent.RecentPhotosViewModel" />
+
+    <variable
+      name="photoItemBinding"
+      type="me.tatarka.bindingcollectionadapter2.ItemBinding" />
+
+    <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
   </data>
 
   <LinearLayout
@@ -33,7 +39,10 @@
 
       <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:itemBinding="@{photoItemBinding}"
+        app:items="@{viewModel.photos}"
+        app:layoutManager="@{LayoutManagers.grid(2)}" />
     </android.support.v4.widget.SwipeRefreshLayout>
   </LinearLayout>
 </layout>

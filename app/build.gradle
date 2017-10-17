@@ -49,6 +49,7 @@ dependencies {
   compile libs.fresco
   kapt libs.dataBindingCompiler
   compile libs.bindingCollectionAdapterRecyclerView
+  compile libs.rxAndroid
 
   compile libs.dagger
   kapt libs.daggerCompiler
