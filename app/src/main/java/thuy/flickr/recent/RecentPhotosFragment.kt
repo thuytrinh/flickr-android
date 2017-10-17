@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
 import thuy.flickr.R
 import thuy.flickr.databinding.RecentPhotosBinding
+import javax.inject.Inject
 
 class RecentPhotosFragment : DaggerFragment() {
+  @Inject lateinit var viewModel: RecentPhotosViewModel
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     retainInstance = true
@@ -22,5 +25,6 @@ class RecentPhotosFragment : DaggerFragment() {
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     val binding = RecentPhotosBinding.bind(view)
+    binding.viewModel = viewModel
   }
 }
