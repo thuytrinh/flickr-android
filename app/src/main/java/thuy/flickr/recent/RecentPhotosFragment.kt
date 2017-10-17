@@ -30,6 +30,8 @@ class RecentPhotosFragment : DaggerFragment() {
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     val binding = RecentPhotosBinding.bind(view)
     binding.swipeRefreshLayout.isEnabled = false
+    binding.toolbar.inflateMenu(R.menu.recent_photos)
+
     binding.photoItemBinding = ItemBinding.of<PhotoViewModel>(BR.viewModel, R.layout.photo)
     binding.viewModel = viewModel
   }
