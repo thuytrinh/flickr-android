@@ -25,6 +25,7 @@ class RecentPhotosFragment : DaggerFragment() {
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     val binding = RecentPhotosBinding.bind(view)
+    binding.swipeRefreshLayout.isEnabled = false
     binding.viewModel = viewModel
   }
 }

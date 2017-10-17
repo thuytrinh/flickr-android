@@ -27,7 +27,6 @@ dependencies {
   compile libs.roomRuntime
   kapt libs.roomCompiler
   compile libs.roomRxJava
-  compile libs.pagingRuntime
 
   compile libs.dagger
   kapt libs.daggerCompiler
