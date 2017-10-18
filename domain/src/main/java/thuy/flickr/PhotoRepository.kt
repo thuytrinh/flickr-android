@@ -11,6 +11,8 @@ interface PhotoRepository {
    */
   fun getRecent(): Flowable<AsyncResult<Photos>>
 
+  fun search(query: String): Flowable<AsyncResult<Photos>>
+
   fun getPhotoById(photoId: String): Single<Photo>
 
   fun getOriginalPhotoSize(photoId: String): Single<PhotoSize>

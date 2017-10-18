@@ -9,6 +9,7 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.schedulers.Schedulers
 import thuy.flickr.*
 import thuy.flickr.core.BaseViewModel
@@ -17,10 +18,11 @@ import javax.inject.Inject
 typealias PhotoViewModels = List<PhotoViewModel>
 
 class RecentPhotosViewModel @Inject internal constructor(
-    private val photoRepository: PhotoRepository,
+    private val getPhotos: GetPhotos,
     private val photoViewModelMapper: PhotoViewModelMapper,
     private val resources: Resources
 ) : BaseViewModel() {
+  val title = ObservableField<String>()
   val photoCountText = ObservableField<String>()
   val isPhotoCountVisible = ObservableBoolean()
   val photos: ObservableList<PhotoViewModel> = ObservableArrayList<PhotoViewModel>()
@@ -40,8 +42,21 @@ class RecentPhotosViewModel @Inject internal constructor(
         }
         .autoClear()
 
+  private val queries = BehaviorProcessor.createDefault<String>("")
+
+  init {
+    queries
+        .map {
+          when (it.isNotBlank()) {
+            true -> "\"$it\""
+            false -> ""
+          }
+        }
+        .subscribe { title.set(it) }
+  }
+
   fun loadPhotos() {
-    photoRepository.getRecent()
+    getPhotos(queries = queries)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { result ->
@@ -82,6 +97,7 @@ class RecentPhotosViewModel @Inject internal constructor(
   }
 
   fun onQueryTextSubmit(query: String?): Boolean {
+    queries.onNext(query ?: "")
     return false
   }
 }
