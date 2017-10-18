@@ -8,9 +8,7 @@ import thuy.flickr.search.SearchFragment
 
 @Module
 abstract class AndroidBindingModule {
-  @ContributesAndroidInjector(modules = arrayOf(
-      PhotoRepositoryModule::class
-  ))
+  @ContributesAndroidInjector
   abstract fun getRecentPhotosFragment(): RecentPhotosFragment
 
   @ContributesAndroidInjector

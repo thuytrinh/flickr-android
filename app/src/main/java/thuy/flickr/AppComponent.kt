@@ -7,7 +7,8 @@ import dagger.android.support.AndroidSupportInjectionModule
 @Component(modules = arrayOf(
     AndroidSupportInjectionModule::class,
     AndroidBindingModule::class,
-    AppModule::class
+    AppModule::class,
+    PhotoRepositoryModule::class
 ))
 interface AppComponent : AndroidInjector<App> {
   @Component.Builder

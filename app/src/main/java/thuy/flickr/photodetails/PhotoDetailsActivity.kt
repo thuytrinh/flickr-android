@@ -5,8 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
-const val KEY_PHOTO_ID = "photoId"
-
 class PhotoDetailsActivity : AppCompatActivity() {
   companion object {
     fun newIntent(context: Context, photoId: String): Intent =
