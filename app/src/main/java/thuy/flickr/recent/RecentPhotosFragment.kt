@@ -5,13 +5,13 @@ import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import dagger.android.support.DaggerFragment
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import thuy.flickr.BR
 import thuy.flickr.R
 import thuy.flickr.databinding.RecentPhotosBinding
 import thuy.flickr.photodetails.PhotoDetailsActivity
-import thuy.flickr.search.SearchActivity
 import javax.inject.Inject
 
 class RecentPhotosFragment : DaggerFragment() {
@@ -39,21 +39,22 @@ class RecentPhotosFragment : DaggerFragment() {
       inflater: LayoutInflater?,
       container: ViewGroup?,
       savedInstanceState: Bundle?
-  ): View? = layoutInflater?.inflate(R.layout.recent_photos, container, false)
+  ): View? {
+    val binding = RecentPhotosBinding.inflate(inflater)
 
-  override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-    val binding = RecentPhotosBinding.bind(view)
     binding.swipeRefreshLayout.isEnabled = false
     binding.toolbar.inflateMenu(R.menu.recent_photos)
-    binding.toolbar.setOnMenuItemClickListener {
-      when (it.itemId) {
-        R.id.search -> startActivity(SearchActivity.newIntent(activity))
-      }
-      true
-    }
+    binding.searchView.setMenuItem(binding.toolbar.menu.findItem(R.id.search))
+    binding.searchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
+      override fun onQueryTextSubmit(query: String?): Boolean = viewModel.onQueryTextSubmit(query)
+
+      override fun onQueryTextChange(newText: String?): Boolean = false
+    })
 
     binding.photoItemBinding = ItemBinding.of<PhotoViewModel>(BR.viewModel, R.layout.photo)
     binding.viewModel = viewModel
+
+    return binding.root
   }
 
   override fun onDestroy() {

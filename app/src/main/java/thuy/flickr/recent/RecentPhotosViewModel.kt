@@ -80,4 +80,8 @@ class RecentPhotosViewModel @Inject internal constructor(
     }
     else -> isPhotoCountVisible.set(false)
   }
+
+  fun onQueryTextSubmit(query: String?): Boolean {
+    return false
+  }
 }

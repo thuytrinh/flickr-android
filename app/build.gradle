@@ -42,6 +42,7 @@ dependencies {
   testCompile libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
   testCompile libs.kluent, { exclude group: "org.jetbrains.kotlin" }
 
+  compile libs.materialSearchView
   compile libs.supportDesign
   compile libs.appCompat
   compile libs.recyclerView

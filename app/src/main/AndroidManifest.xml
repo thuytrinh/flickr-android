@@ -20,7 +20,6 @@
       </intent-filter>
     </activity>
     <activity android:name=".photodetails.PhotoDetailsActivity" />
-    <activity android:name=".search.SearchActivity" />
   </application>
 
 </manifest>
