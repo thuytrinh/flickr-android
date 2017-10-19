@@ -6,11 +6,11 @@ import javax.inject.Inject
 open class GetPhotos @Inject internal constructor(
     private val photoRepository: PhotoRepository
 ) {
-  open operator fun invoke(queries: Flowable<String>): Flowable<AsyncResult<Photos>> =
+  open operator fun invoke(queries: Flowable<Query>): Flowable<AsyncResult<Photos>> =
       queries.switchMap {
-        when (it.isNotBlank()) {
-          true -> photoRepository.search(it)
-          false -> photoRepository.getRecent()
+        when (it) {
+          is Search -> photoRepository.search(it.queryText)
+          is Recent -> photoRepository.getRecent()
         }
       }
 }

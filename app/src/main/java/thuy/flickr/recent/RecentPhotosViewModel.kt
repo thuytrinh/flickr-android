@@ -5,22 +5,25 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableList
+import android.os.Bundle
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.schedulers.Schedulers
 import thuy.flickr.*
 import thuy.flickr.core.BaseViewModel
 import javax.inject.Inject
+
+internal const val KEY_QUERY = "query"
 
 typealias PhotoViewModels = List<PhotoViewModel>
 
 class RecentPhotosViewModel @Inject internal constructor(
     private val getPhotos: GetPhotos,
     private val photoViewModelMapper: PhotoViewModelMapper,
-    private val resources: Resources
+    private val resources: Resources,
+    private val queryRepository: QueryRepository
 ) : BaseViewModel() {
   val title = ObservableField<String>()
   val photoCountText = ObservableField<String>()
@@ -42,21 +45,17 @@ class RecentPhotosViewModel @Inject internal constructor(
         }
         .autoClear()
 
-  private val queries = BehaviorProcessor.createDefault<String>("")
-
   init {
-    queries
+    queryRepository.queries
         .map {
-          when (it.isNotBlank()) {
-            true -> "\"$it\""
-            false -> resources.getString(R.string.recent)
+          when (it) {
+            is Search -> "\"${it.queryText}\""
+            is Recent -> resources.getString(R.string.recent)
           }
         }
         .subscribe { title.set(it) }
-  }
 
-  fun loadPhotos() {
-    getPhotos(queries = queries)
+    getPhotos(queries = queryRepository.queries)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { result ->
@@ -73,6 +72,19 @@ class RecentPhotosViewModel @Inject internal constructor(
             }
           }
         }
+  }
+
+  fun loadPhotos(savedInstanceState: Bundle?) {
+    val query = savedInstanceState?.getString(KEY_QUERY)
+    queryRepository.putQueryText(query)
+  }
+
+  fun retry() {
+    queryRepository.putQueryText(queryRepository.latestQuery)
+  }
+
+  fun onSaveInstanceState(outState: Bundle?) {
+    outState?.putString(KEY_QUERY, queryRepository.latestQuery)
   }
 
   private fun updatePhotos(result: Success<Photos>) {
@@ -97,7 +109,7 @@ class RecentPhotosViewModel @Inject internal constructor(
   }
 
   fun onQueryTextSubmit(query: String?): Boolean {
-    queries.onNext(query ?: "")
+    queryRepository.putQueryText(query)
     return false
   }
 }

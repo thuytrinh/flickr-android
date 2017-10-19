@@ -23,18 +23,23 @@ class RecentPhotosFragment : DaggerFragment() {
     super.onCreate(savedInstanceState)
     retainInstance = true
 
-    viewModel.loadPhotos()
+    viewModel.loadPhotos(savedInstanceState)
     viewModel.onErrorLoadingPhotos.subscribe {
       view?.let {
         Snackbar
             .make(it, R.string.cannot_load_photos, Snackbar.LENGTH_LONG)
-            .setAction(R.string.retry) { viewModel.loadPhotos() }
+            .setAction(R.string.retry) { viewModel.retry() }
             .show()
       }
     }
     viewModel.onPhotoTapped.subscribe {
       startActivity(PhotoDetailsActivity.newIntent(activity, it))
     }
+  }
+
+  override fun onSaveInstanceState(outState: Bundle?) {
+    super.onSaveInstanceState(outState)
+    viewModel.onSaveInstanceState(outState)
   }
 
   override fun onCreateView(
