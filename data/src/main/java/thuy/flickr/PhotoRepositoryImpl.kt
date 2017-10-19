@@ -39,7 +39,7 @@ internal class PhotoRepositoryImpl internal constructor(
       api.getRecent(API_KEY)
           .toFlowable()
           .map { it.photos()?.photos() ?: emptyList() }
-          .map { it.map { photoMapper(it) } }
+          .map { photoMapper(it) }
           .map<AsyncResult<Photos>> { Success(it) }
           .doOnError { Timber.e(it, "Error getting recent") }
           .onErrorReturn { Failure(it) }
