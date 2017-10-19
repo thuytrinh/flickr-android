@@ -7,7 +7,7 @@ open class GetPhotos @Inject internal constructor(
     private val photoRepository: PhotoRepository
 ) {
   open operator fun invoke(queries: Flowable<String>): Flowable<AsyncResult<Photos>> =
-      queries.flatMap {
+      queries.switchMap {
         when (it.isNotBlank()) {
           true -> photoRepository.search(it)
           false -> photoRepository.getRecent()

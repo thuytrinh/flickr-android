@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.facebook.drawee.drawable.ProgressBarDrawable
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
-import dagger.android.support.DaggerFragment
+import thuy.flickr.core.DaggerFragment
 import thuy.flickr.databinding.PhotoDetailsBinding
 import javax.inject.Inject
-
 
 class PhotoDetailsFragment : DaggerFragment() {
   @Inject lateinit var viewModel: PhotoDetailsViewModel

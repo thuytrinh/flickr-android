@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.miguelcatalan.materialsearchview.MaterialSearchView
-import dagger.android.support.DaggerFragment
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import thuy.flickr.BR
 import thuy.flickr.R
+import thuy.flickr.core.DaggerFragment
 import thuy.flickr.databinding.RecentPhotosBinding
 import thuy.flickr.photodetails.PhotoDetailsActivity
 import javax.inject.Inject
