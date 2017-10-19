@@ -49,7 +49,7 @@ class RecentPhotosViewModel @Inject internal constructor(
         .map {
           when (it.isNotBlank()) {
             true -> "\"$it\""
-            false -> ""
+            false -> resources.getString(R.string.recent)
           }
         }
         .subscribe { title.set(it) }
