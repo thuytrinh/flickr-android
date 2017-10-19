@@ -24,6 +24,9 @@ class PhotoDetailsFragment : DaggerFragment() {
       savedInstanceState: Bundle?
   ): View? {
     val binding = PhotoDetailsBinding.inflate(inflater)
+    binding.toolbar.setNavigationOnClickListener {
+      activity.finish()
+    }
     binding.viewModel = viewModel
     return binding.root
   }
