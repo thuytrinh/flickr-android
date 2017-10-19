@@ -2,6 +2,8 @@ package thuy.flickr.recent
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,11 +52,28 @@ class RecentPhotosFragment : DaggerFragment() {
 
       override fun onQueryTextChange(newText: String?): Boolean = false
     })
+    addDividers(binding.photosView)
 
     binding.photoItemBinding = ItemBinding.of<PhotoViewModel>(BR.viewModel, R.layout.photo)
     binding.viewModel = viewModel
 
     return binding.root
+  }
+
+  private fun addDividers(photosView: RecyclerView) {
+    val verticalDividerItemDecoration = DividerItemDecoration(
+        activity, DividerItemDecoration.VERTICAL
+    ).apply {
+      setDrawable(resources.getDrawable(R.drawable.vertical_divider))
+    }
+    photosView.addItemDecoration(verticalDividerItemDecoration)
+
+    val horizontalDividerItemDecoration = DividerItemDecoration(
+        activity, DividerItemDecoration.HORIZONTAL
+    ).apply {
+      setDrawable(resources.getDrawable(R.drawable.horizontal_divider))
+    }
+    photosView.addItemDecoration(horizontalDividerItemDecoration)
   }
 
   override fun onDestroy() {
