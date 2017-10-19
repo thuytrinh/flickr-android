@@ -1,5 +1,7 @@
 package thuy.flickr
 
+import android.arch.persistence.room.Room
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -14,7 +16,7 @@ import javax.inject.Singleton
 class PhotoRepositoryModule {
   @Provides
   @Singleton
-  fun getPhotoRepository(): PhotoRepository {
+  fun getPhotoRepository(context: Context): PhotoRepository {
     val logging = HttpLoggingInterceptor()
     logging.level = HttpLoggingInterceptor.Level.BODY
 
@@ -29,6 +31,20 @@ class PhotoRepositoryModule {
         .client(httpClient)
         .build()
         .create(FlickrApi::class.java)
-    return PhotoRepositoryImpl(api, PhotoMapper())
+
+    val appDatabase = createAppDatabase(context)
+    return PhotoRepositoryImpl(
+        api,
+        PhotoMapper(),
+        PhotoEntityMapper(),
+        appDatabase.photoDao()
+    )
   }
+
+  private fun createAppDatabase(context: Context): AppDatabase =
+      Room.databaseBuilder<AppDatabase>(
+          context,
+          AppDatabase::class.java,
+          "flickr.sqlite"
+      ).build()
 }

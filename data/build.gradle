@@ -26,6 +26,9 @@ dependencies {
   compile libs.kotlin
   compile libs.timber
 
+  compile libs.roomRuntime
+  kapt libs.roomCompiler
+
   compile libs.dagger
   kapt libs.daggerCompiler
 

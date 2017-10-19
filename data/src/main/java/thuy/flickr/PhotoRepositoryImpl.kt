@@ -7,7 +7,9 @@ import java.util.concurrent.ConcurrentHashMap
 
 internal class PhotoRepositoryImpl internal constructor(
     private val api: FlickrApi,
-    private val photoMapper: PhotoMapper
+    private val photoMapper: PhotoMapper,
+    private val photoEntityMapper: PhotoEntityMapper,
+    private val photoDao: PhotoDao
 ) : PhotoRepository {
   private val memoryCache = ConcurrentHashMap<String, PhotoEntity>()
 
@@ -16,27 +18,29 @@ internal class PhotoRepositoryImpl internal constructor(
 
   override fun getOriginalPhotoSize(photoId: String): Single<PhotoSize> =
       Single.fromCallable {
-        val photoEntity = memoryCache[photoId]
-        photoMapper.toPhotoSize(checkNotNull(photoEntity) {
-          "Photo not found in memory cache"
+        photoMapper.toPhotoSize(checkNotNull(getPhotoEntity(photoId)) {
+          "Photo not found"
         })
       }
 
   override fun getPhotoById(photoId: String): Single<Photo> =
       Single.fromCallable {
-        val photo = memoryCache[photoId]
-        photoMapper.toPhoto(checkNotNull(photo) {
-          "Photo not found in memory cache"
+        photoMapper.toPhoto(checkNotNull(getPhotoEntity(photoId)) {
+          "Photo not found"
         })
       }
 
   override fun getRecent(): Flowable<AsyncResult<Photos>> =
       api.getRecent(API_KEY).toPhotos()
 
+  private fun getPhotoEntity(photoId: String): PhotoEntity? =
+      memoryCache[photoId] ?: photoEntityMapper(photoDao.loadPhotoById(photoId))
+
   private fun Single<PhotosResponseEntity>.toPhotos(): Flowable<AsyncResult<Photos>> =
       this.toFlowable()
           .map { it.photos()?.photos() ?: emptyList() }
           .doOnNext { it.forEach { memoryCache[it.id()] = it } }
+          .doOnNext { photoDao.insertAll(photoEntityMapper.toDbEntities(it)) }
           .map { photoMapper(it) }
           .map<AsyncResult<Photos>> { Success(it) }
           .doOnError { Timber.e(it, "Error getting recent") }
