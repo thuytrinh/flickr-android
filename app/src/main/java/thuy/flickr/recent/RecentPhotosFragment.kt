@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import me.tatarka.bindingcollectionadapter2.ItemBinding
+import me.tatarka.bindingcollectionadapter2.LayoutManagers
 import thuy.flickr.BR
 import thuy.flickr.R
 import thuy.flickr.core.DaggerFragment
@@ -57,6 +58,12 @@ class RecentPhotosFragment : DaggerFragment() {
 
       override fun onQueryTextChange(newText: String?): Boolean = false
     })
+
+    // To configure columns for different orientations.
+    // e.g. for portrait, column count is 2 while for landscape, the count is 4.
+    binding.photosView.layoutManager = LayoutManagers
+        .grid(resources.getInteger(R.integer.galleryColumns))
+        .create(binding.photosView)
     addDividers(binding.photosView)
 
     binding.photoItemBinding = ItemBinding.of<PhotoViewModel>(BR.viewModel, R.layout.photo)

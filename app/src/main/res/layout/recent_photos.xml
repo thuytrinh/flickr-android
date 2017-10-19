@@ -11,8 +11,6 @@
     <variable
       name="photoItemBinding"
       type="me.tatarka.bindingcollectionadapter2.ItemBinding" />
-
-    <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
   </data>
 
   <LinearLayout
@@ -59,8 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:itemBinding="@{photoItemBinding}"
-        app:items="@{viewModel.photos}"
-        app:layoutManager="@{LayoutManagers.grid(2)}" />
+        app:items="@{viewModel.photos}" />
     </android.support.v4.widget.SwipeRefreshLayout>
   </LinearLayout>
 </layout>
