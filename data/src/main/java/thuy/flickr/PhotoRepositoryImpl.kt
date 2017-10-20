@@ -43,7 +43,7 @@ internal class PhotoRepositoryImpl internal constructor(
           .doOnNext { photoDao.insertAll(photoEntityMapper.toDbEntities(it)) }
           .map { photoMapper(it) }
           .map<AsyncResult<Photos>> { Success(it) }
-          .doOnError { Timber.e(it, "Error getting recent") }
+          .doOnError { Timber.e(it, "Error getting photos") }
           .onErrorReturn { Failure(it) }
           .startWith(Busy())
 }
