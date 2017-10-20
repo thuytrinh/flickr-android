@@ -15,6 +15,13 @@ android {
 }
 
 dependencies {
+  testCompile libs.junit
+  testCompile libs.assertjCore
+  testCompile libs.mockitoCore
+  testCompile libs.robolectric
+  testCompile libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
+  testCompile libs.kluent, { exclude group: "org.jetbrains.kotlin" }
+
   compile project(":domain")
   compile libs.rxJava
   compile libs.gson

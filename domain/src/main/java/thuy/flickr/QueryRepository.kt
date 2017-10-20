@@ -8,9 +8,9 @@ import javax.inject.Inject
 open class QueryRepository @Inject internal constructor() {
   private val queryTextRelay = BehaviorRelay.create<String>()
 
-  val latestQuery: String? get() = queryTextRelay.value
+  open val latestQueryText: String? get() = queryTextRelay.value
 
-  val queries: Flowable<Query>
+  open val queries: Flowable<Query>
     get() = queryTextRelay
         .map {
           when (it.isBlank()) {
@@ -20,7 +20,7 @@ open class QueryRepository @Inject internal constructor() {
         }
         .toFlowable(BackpressureStrategy.BUFFER)
 
-  open fun putQueryText(query: String?) {
-    queryTextRelay.accept(query ?: "")
+  open fun putQueryText(queryText: String?) {
+    queryTextRelay.accept(queryText ?: "")
   }
 }

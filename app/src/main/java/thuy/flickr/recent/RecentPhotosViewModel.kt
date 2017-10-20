@@ -9,10 +9,9 @@ import android.os.Bundle
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import thuy.flickr.*
 import thuy.flickr.core.BaseViewModel
+import thuy.flickr.core.SchedulerFactory
 import javax.inject.Inject
 
 internal const val KEY_QUERY = "query"
@@ -23,7 +22,8 @@ class RecentPhotosViewModel @Inject internal constructor(
     private val getPhotos: GetPhotos,
     private val photoViewModelMapper: PhotoViewModelMapper,
     private val resources: Resources,
-    private val queryRepository: QueryRepository
+    private val queryRepository: QueryRepository,
+    private val schedulerFactory: SchedulerFactory
 ) : BaseViewModel() {
   val title = ObservableField<String>()
   val photoCountText = ObservableField<String>()
@@ -32,13 +32,25 @@ class RecentPhotosViewModel @Inject internal constructor(
   val isLoading = ObservableBoolean()
 
   private val onErrorLoadingPhotosRelay = PublishRelay.create<Unit>()
+
+  /**
+   * Returns a signal that emits an event
+   * whenever error loading photos has just occurred.
+   */
   val onErrorLoadingPhotos: Observable<Unit>
     get() = onErrorLoadingPhotosRelay.autoClear()
 
   private val photosRelay = BehaviorRelay.create<PhotoViewModels>()
+
+  /**
+   * Returns a signal that, when users tap a photo,
+   * it will emit the id of the selected photo.
+   */
   val onPhotoTapped: Observable<PhotoId>
     get() = photosRelay
         .switchMap {
+          // To turn a stream of PhotoViewModels into
+          // a stream of tap events on those PhotoViewModels.
           Observable
               .merge(it.map { it.tapAction.observe })
               .map { it.id }
@@ -56,8 +68,8 @@ class RecentPhotosViewModel @Inject internal constructor(
         .subscribe { title.set(it) }
 
     getPhotos(queries = queryRepository.queries)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(schedulerFactory.ioScheduler)
+        .observeOn(schedulerFactory.mainScheduler)
         .subscribe { result ->
           when (result) {
             is Busy -> isLoading.set(true)
@@ -80,11 +92,11 @@ class RecentPhotosViewModel @Inject internal constructor(
   }
 
   fun retry() {
-    queryRepository.putQueryText(queryRepository.latestQuery)
+    queryRepository.putQueryText(queryRepository.latestQueryText)
   }
 
   fun onSaveInstanceState(outState: Bundle?) {
-    outState?.putString(KEY_QUERY, queryRepository.latestQuery)
+    outState?.putString(KEY_QUERY, queryRepository.latestQueryText)
   }
 
   private fun updatePhotos(result: Success<Photos>) {

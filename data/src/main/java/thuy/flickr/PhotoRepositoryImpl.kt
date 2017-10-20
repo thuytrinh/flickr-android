@@ -11,7 +11,7 @@ internal class PhotoRepositoryImpl internal constructor(
     private val photoEntityMapper: PhotoEntityMapper,
     private val photoDao: PhotoDao
 ) : PhotoRepository {
-  private val memoryCache = ConcurrentHashMap<String, PhotoEntity>()
+  internal val memoryCache = ConcurrentHashMap<String, PhotoEntity>()
 
   override fun search(query: String): Flowable<AsyncResult<Photos>> =
       api.search(API_KEY, query).toPhotos()
