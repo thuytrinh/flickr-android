@@ -4,39 +4,39 @@ apply plugin: "kotlin-kapt"
 
 android {
   compileSdkVersion versions.compileSdkVersion
-  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion versions.minSdkVersion
     targetSdkVersion versions.targetSdkVersion
     versionCode 1
     versionName "1.0"
+    javaCompileOptions.annotationProcessorOptions.includeCompileClasspath true
   }
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.mockitoCore
-  testCompile libs.robolectric
-  testCompile libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
-  testCompile libs.kluent, { exclude group: "org.jetbrains.kotlin" }
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.robolectric
+  testImplementation libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
+  testImplementation libs.kluent, { exclude group: "org.jetbrains.kotlin" }
 
-  compile project(":domain")
-  compile libs.rxJava
-  compile libs.gson
-  compile libs.okHttp
-  compile libs.loggingInterceptor
-  compile libs.retrofit
-  compile libs.retrofitAdapterRxJava
-  compile libs.retrofitConverterGson
-  compile libs.kotlin
-  compile libs.timber
+  implementation project(":domain")
+  implementation libs.rxJava
+  implementation libs.gson
+  implementation libs.okHttp
+  implementation libs.loggingInterceptor
+  implementation libs.retrofit
+  implementation libs.retrofitAdapterRxJava
+  implementation libs.retrofitConverterGson
+  implementation libs.kotlin
+  implementation libs.timber
 
-  compile libs.roomRuntime
+  implementation libs.roomRuntime
   kapt libs.roomCompiler
 
-  compile libs.dagger
+  implementation libs.dagger
   kapt libs.daggerCompiler
 
   // Setup for http://immutables.github.io/.
