@@ -5,7 +5,6 @@ apply plugin: "kotlin-kapt"
 
 android {
   compileSdkVersion versions.compileSdkVersion
-  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
     applicationId "thuy.flickr"
@@ -35,31 +34,30 @@ android {
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.mockitoCore
-  testCompile libs.robolectric
-  testCompile libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
-  testCompile libs.kluent, { exclude group: "org.jetbrains.kotlin" }
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.robolectric
+  testImplementation libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
+  testImplementation libs.kluent, { exclude group: "org.jetbrains.kotlin" }
 
-  compile libs.materialSearchView
-  compile libs.supportDesign
-  compile libs.appCompat
-  compile libs.recyclerView
-  compile libs.kotlin
-  compile libs.fresco
-  compile libs.photoDraweeView
-  kapt libs.dataBindingCompiler
-  compile libs.bindingCollectionAdapterRecyclerView
-  compile libs.rxAndroid
-  compile libs.rxRelay
+  implementation libs.materialSearchView
+  implementation libs.supportDesign
+  implementation libs.appCompat
+  implementation libs.recyclerView
+  implementation libs.kotlin
+  implementation libs.fresco
+  implementation libs.photoDraweeView
+  implementation libs.bindingCollectionAdapterRecyclerView
+  implementation libs.rxAndroid
+  implementation libs.rxRelay
 
-  compile libs.dagger
+  implementation libs.dagger
   kapt libs.daggerCompiler
   kapt libs.daggerAndroidProcessor
-  compile libs.daggerAndroid
-  compile libs.daggerAndroidSupport
+  implementation libs.daggerAndroid
+  implementation libs.daggerAndroidSupport
 
-  compile project(":domain")
-  compile project(":data")
+  implementation project(":domain")
+  implementation project(":data")
 }
