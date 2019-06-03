@@ -51,6 +51,7 @@ dependencies {
   implementation libs.bindingCollectionAdapterRecyclerView
   implementation libs.rxAndroid
   implementation libs.rxRelay
+  implementation libs.timber
 
   implementation libs.dagger
   kapt libs.daggerCompiler
