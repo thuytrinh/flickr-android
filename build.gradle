@@ -10,7 +10,6 @@ buildscript {
     // See changelog: http://developer.android.com/tools/revisions/gradle-plugin.html.
     classpath "com.android.tools.build:gradle:$versions.androidPluginVersion"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion"
-    classpath "me.tatarka:gradle-retrolambda:3.3.1"
   }
 }
 
