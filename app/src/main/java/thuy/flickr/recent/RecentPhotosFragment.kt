@@ -2,6 +2,7 @@ package thuy.flickr.recent
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -34,11 +35,11 @@ class RecentPhotosFragment : DaggerFragment() {
       }
     }
     viewModel.onPhotoTapped.subscribe {
-      startActivity(PhotoDetailsActivity.newIntent(activity, it))
+      startActivity(PhotoDetailsActivity.newIntent(requireActivity(), it))
     }
   }
 
-  override fun onSaveInstanceState(outState: Bundle?) {
+  override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
     viewModel.onSaveInstanceState(outState)
   }
@@ -74,16 +75,16 @@ class RecentPhotosFragment : DaggerFragment() {
 
   private fun addDividers(photosView: RecyclerView) {
     val verticalDividerItemDecoration = DividerItemDecoration(
-        activity, DividerItemDecoration.VERTICAL
+      activity, DividerItemDecoration.VERTICAL
     ).apply {
-      setDrawable(resources.getDrawable(R.drawable.vertical_divider))
+      setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.vertical_divider)!!)
     }
     photosView.addItemDecoration(verticalDividerItemDecoration)
 
     val horizontalDividerItemDecoration = DividerItemDecoration(
-        activity, DividerItemDecoration.HORIZONTAL
+      activity, DividerItemDecoration.HORIZONTAL
     ).apply {
-      setDrawable(resources.getDrawable(R.drawable.horizontal_divider))
+      setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.horizontal_divider)!!)
     }
     photosView.addItemDecoration(horizontalDividerItemDecoration)
   }
