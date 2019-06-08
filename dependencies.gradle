@@ -17,7 +17,7 @@ versions.supportLibraryVersion = "28.0.0"
 versions.androidPluginVersion = "3.4.1"
 versions.okHttpVersion = "3.9.0"
 versions.retrofitVersion = "2.3.0"
-versions.dagger = "2.12"
+versions.dagger = "2.20"
 versions.architectureComponents = "1.1.1"
 ext.versions = versions
 
@@ -61,7 +61,7 @@ libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava2:$versions.r
 libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
 libs.materialSearchView = "com.miguelcatalan:materialsearchview:1.4.0"
 libs.fresco = "com.facebook.fresco:fresco:1.5.0"
-libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.2.0"
+libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.3.0-beta3"
 libs.timber = "com.jakewharton.timber:timber:4.5.1"
 
 // See https://github.com/ongakuer/PhotoDraweeView.
