@@ -1,5 +1,7 @@
 # flickr-android
 
+[![Build Status](https://app.bitrise.io/app/514df1b8630ddaa5/status.svg?token=BZ4v2YFVjENaH_FPaiDJpw&branch=master)](https://app.bitrise.io/app/514df1b8630ddaa5)
+
 A small sample app to showcase architecting app using Clean Architecture and MVVM
 
 ![Overview](images/overview.png)
