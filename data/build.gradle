@@ -41,7 +41,7 @@ dependencies {
 
   // Setup for http://immutables.github.io/.
   kapt libs.value
-  provided libs.valueAnnotations
-  provided libs.builderAnnotations
-  provided libs.gsonAnnotations
+  compileOnly libs.valueAnnotations
+  compileOnly libs.builderAnnotations
+  compileOnly libs.gsonAnnotations
 }
