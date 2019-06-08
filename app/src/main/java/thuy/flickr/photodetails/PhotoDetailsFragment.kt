@@ -27,7 +27,7 @@ class PhotoDetailsFragment : DaggerFragment() {
   ): View? {
     val binding = PhotoDetailsBinding.inflate(inflater)
     binding.toolbar.setNavigationOnClickListener {
-      activity.finish()
+      requireActivity().finish()
     }
 
     // See http://frescolib.org/docs/using-simpledraweeview.html.

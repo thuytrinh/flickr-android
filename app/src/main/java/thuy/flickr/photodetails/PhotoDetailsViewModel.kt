@@ -12,7 +12,7 @@ import javax.inject.Inject
 const val KEY_PHOTO_ID = "photoId"
 
 class PhotoDetailsViewModel @Inject internal constructor(
-    private val getOriginalPhoto: GetOriginalPhoto
+  private val getOriginalPhoto: GetOriginalPhoto
 ) : BaseViewModel() {
   val title = ObservableField<String>()
   val link = ObservableField<Uri>()
@@ -23,15 +23,13 @@ class PhotoDetailsViewModel @Inject internal constructor(
       "Must specify photo id"
     }
 
-    photoId?.let {
-      getOriginalPhoto(it)
-          .subscribeOn(Schedulers.io())
-          .observeOn(AndroidSchedulers.mainThread())
-          .subscribe { (photo, size) ->
-            title.set(photo.title)
-            link.set(Uri.parse(size.link))
-          }
-          .autoDispose()
-    }
+    getOriginalPhoto(photoId)
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribe { (photo, size) ->
+        title.set(photo.title)
+        link.set(Uri.parse(size.link))
+      }
+      .autoDispose()
   }
 }
