@@ -1,6 +1,6 @@
 package thuy.flickr
 
-open internal class PhotoEntityMapper {
+internal open class PhotoEntityMapper {
   open operator fun invoke(entity: PhotoDbEntity?): PhotoEntity? = entity?.let {
     ImmutablePhotoEntity.builder().apply {
       id(it.id)
