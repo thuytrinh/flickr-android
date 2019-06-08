@@ -1,6 +1,6 @@
 package thuy.flickr
 
-open internal class PhotoMapper {
+internal open class PhotoMapper {
   open operator fun invoke(entities: List<PhotoEntity>): List<Photo> =
       entities
           .filter { it.thumbnailUrl() != null }
