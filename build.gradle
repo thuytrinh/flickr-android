@@ -36,7 +36,7 @@ subprojects {
       reports {
         custom {
           reportId = "DangerJsReport"
-          destination = file("detekt-reports/${project.name}.json")
+          destination = file("${rootDir}/detekt-reports/${project.name}.json")
         }
       }
     }
