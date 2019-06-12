@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-  id("io.gitlab.arturbosch.detekt").version("1.0.0-RC15")
+  id "io.gitlab.arturbosch.detekt" version "1.0.0-RC15"
 }
 
 allprojects {
@@ -28,10 +28,22 @@ allprojects {
 }
 
 subprojects {
-  apply plugin: "io.gitlab.arturbosch.detekt"
+  if (project.name != "detekt-json-report") {
+    apply plugin: "io.gitlab.arturbosch.detekt"
 
-  detekt {
-    toolVersion = "1.0.0-RC15"
+    detekt {
+      toolVersion = "1.0.0-RC15"
+      reports {
+        custom {
+          reportId = "DangerJsReport"
+          destination = file("detekt-reports/${project.name}.json")
+        }
+      }
+    }
+
+    dependencies {
+      detektPlugins project(":detekt-dangerjs-report")
+    }
   }
 }
 
