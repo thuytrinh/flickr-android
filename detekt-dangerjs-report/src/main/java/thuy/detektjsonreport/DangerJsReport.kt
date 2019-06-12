@@ -14,8 +14,7 @@ class DangerJsReport : OutputReport() {
     val comments = detektion.findings.values.map {
       it.map { finding ->
         DangerJsComment(
-          id = finding.id,
-          message = finding.message,
+          message = "${finding.id}: ${finding.message}",
           file = finding.location.file,
           line = finding.location.source.line
         )
@@ -26,7 +25,6 @@ class DangerJsReport : OutputReport() {
 }
 
 internal data class DangerJsComment(
-  val id: String,
   val message: String,
   val file: String,
   val line: Int
