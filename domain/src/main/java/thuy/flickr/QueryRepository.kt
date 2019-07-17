@@ -24,45 +24,59 @@ open class QueryRepository @Inject internal constructor() {
     queryTextRelay.accept(queryText ?: "")
   }
 
-  private fun a() {
+  private fun a(): Int {
+    return 0;
   }
 
-  private fun b() {
+  private fun b(): Int {
+    return 0;
   }
 
-  private fun c() {
+  private fun c(): Int {
+    return 0;
   }
 
-  private fun d() {
+  private fun d(): Int {
+    return 0;
   }
 
-  private fun e() {
+  private fun e(): Int {
+    return 0;
   }
 
-  private fun f() {
+  private fun f(): Int {
+    return 0;
   }
 
-  private fun g() {
+  private fun g(): Int {
+    return 0;
   }
 
-  private fun h() {
+  private fun h(): Int {
+    return 0;
   }
 
-  private fun i() {
+  private fun i(): Int {
+    return 0;
   }
 
-  private fun j() {
+  private fun j(): Int {
+    return 0;
   }
 
-  private fun k() {
+  private fun k(): Int {
+    return 0;
   }
 
-  private fun l() {
+  private fun l(): Int {
+    return 0;
   }
 
-  private fun m() {
+  private fun m(): Int {
+    return 0;
   }
 
-  private fun o() {
+  private fun o(): Int {
+    return 0;
   }
 }
