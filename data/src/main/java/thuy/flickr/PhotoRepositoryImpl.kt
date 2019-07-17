@@ -46,4 +46,60 @@ internal class PhotoRepositoryImpl internal constructor(
           .doOnError { Timber.e(it, "Error getting photos") }
           .onErrorReturn { Failure(it) }
           .startWith(Busy())
+
+  private fun a(): Int {
+    return 0;
+  }
+
+  private fun b(): Int {
+    return 0;
+  }
+
+  private fun c(): Int {
+    return 0;
+  }
+
+  private fun d(): Int {
+    return 0;
+  }
+
+  private fun e(): Int {
+    return 0;
+  }
+
+  private fun f(): Int {
+    return 0;
+  }
+
+  private fun g(): Int {
+    return 0;
+  }
+
+  private fun h(): Int {
+    return 0;
+  }
+
+  private fun i(): Int {
+    return 0;
+  }
+
+  private fun j(): Int {
+    return 0;
+  }
+
+  private fun k(): Int {
+    return 0;
+  }
+
+  private fun l(): Int {
+    return 0;
+  }
+
+  private fun m(): Int {
+    return 0;
+  }
+
+  private fun o(): Int {
+    return 0;
+  }
 }
