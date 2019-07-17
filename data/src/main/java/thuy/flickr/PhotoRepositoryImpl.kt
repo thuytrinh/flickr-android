@@ -87,8 +87,7 @@ internal class PhotoRepositoryImpl internal constructor(
     return 0;
   }
 
-  private fun k(): Int {
-    return 0;
+  private fun k() {
   }
 
   private fun l(): Int {
